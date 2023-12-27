@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: socials-youtube
+  config:
+    import: "optional:configserver:http://localhost:8888"
+  profiles:
+    active: local
+  data:
+    rest:
+      basePath: "/api/socials/youtube"
+
+server:
+  port: 8084
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      post:
+        enabled: true
+
+logging:
+  level:
+    org:
+      example:
+        socials:
+          youtube:
+            rabbit: DEBUG
+
+info:
+  app:
+    name: "Socials YouTube module"
+    description: "The module intended to get YouTube posts and send them to social storage"
+
+socials:
+  rabbit:
+    exchange:
+      storage:
+        name: socials-storage
